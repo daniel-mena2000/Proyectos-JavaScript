@@ -77,7 +77,7 @@ function iniciaEstudio(){
                             alarma.play()
                         }, 1000);
                        clearInterval(time) 
-                       contar.innerHTML = `<h4>Fin de tu tiempo de estudio :)<h4/>`
+                       contar.innerHTML = `<h4>Se ha acabado el tiempo :)<h4/>`
 
                        minutos = 0;
                        segundos = 0;
