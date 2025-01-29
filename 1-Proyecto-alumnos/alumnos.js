@@ -19,6 +19,11 @@ const listaAlumnos = [
 
 console.log(listaAlumnos);
 
+const contador = () =>{
+    setTimeout(() => {
+        imprimirInfo.textContent = ""
+    }, 5000);
+}
 const crearElementoMensaje = (mensaje, color) =>{
     const p = document.createElement("p");
     p.style.color = color
@@ -52,7 +57,7 @@ btn.addEventListener("click", ()=>{
 const agregarAlumno = (nombreAlumnoAgre, asistenciasAgre) =>{
     if (nombreAlumnoAgre == '' || asistenciasAgre == '') {
         crearElementoMensaje(`Agrega los datos requeridos`,"red");
-
+        contador();
 
     }else{
     let alumnoExistente = false;
@@ -62,6 +67,7 @@ const agregarAlumno = (nombreAlumnoAgre, asistenciasAgre) =>{
         if (nombreAlumnoAgre === soloNombre) {
             alumnoExistente = true;
             crearElementoMensaje(`EL alumno ${iteratorAgre.nombre} ya existe`,"blue");
+            contador();
             break;
         }
     }
@@ -71,6 +77,8 @@ const agregarAlumno = (nombreAlumnoAgre, asistenciasAgre) =>{
         nuevosAlumnos.asistencias = asistenciasAgre;
         listaAlumnos.push(nuevosAlumnos)
         crearElementoMensaje(`El alumno: ${nombreAlumnoAgre} con ${asistenciasAgre} asistencias se agrego con exito a la lista`,"purple")
+
+       contador()
     }
 }
 }
