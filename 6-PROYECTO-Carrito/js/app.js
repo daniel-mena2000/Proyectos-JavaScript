@@ -22,10 +22,9 @@ vaciarCarritoBtn.addEventListener('click', () =>{
 function agregarCurso(e) {
     e.preventDefault();
 
-// Para evitar el event Bubling y que el evento se disperse por todo el componente seleccionamos que solo se active la funcion si contiene la clase "agregar-carrito"
+
     if (e.target.classList.contains('agregar-carrito')) {
-// Seleccionamos todo el componente para poder acceder a la imagen titulo etc
-// Seria seleccionar el padre de "agregar-carrito" que es "info-card" y seleccionar su padre de este que es "card"
+
         const cursoSeleccionado = e.target.parentElement.parentElement
         leerDatosCurso(cursoSeleccionado)
     }
@@ -33,24 +32,17 @@ function agregarCurso(e) {
 
 function eliminarCurso(e) {
     console.log(e.target.classList);
-// Identificamos que de todo el componente estemos presionando el que tenga la clase "borrar-curso"
     if (e.target.classList.contains('borrar-curso')) {
-// Obtenemos el data-id que nos ayudara a identificar el elemento que queremos eliminar
         const cursoId = e.target.getAttribute('data-id');
 
         articuloCarrito = articuloCarrito.filter(item => item.id !== cursoId); //Lo eliminamos del array no del HTML
 
 
     carritoHTML(); //iterar sobre el carrito y mostrar su HTML
-
-
-    }
-
-}
+    }};
 
 function leerDatosCurso(curso) {
-    //console.log(curso);
-// crear un objeto con el contenido del curso actual
+
 const infoCurso = {
     imagen: curso.querySelector('img').src,
     titulo: curso.querySelector('h4').textContent,
@@ -58,8 +50,7 @@ const infoCurso = {
     id: curso.querySelector('a').getAttribute('data-id'),
     cantidad: 1
 }
-// REVISA SI UN ELEMNTO YA EXISTE EN EL CARRITO
-// Recordar que some itera un array de objetos, lo usaremos para verificar si un elemento ya existe
+
 
 const existe = articuloCarrito.some(item => item.id === infoCurso.id);
 
@@ -67,7 +58,6 @@ if (existe) {
 
     const cursos = articuloCarrito.map(itemD => {
         if (itemD.id === infoCurso.id) {
-// Es necesario retornar el "cursos" con el nuevo valor
             itemD.cantidad++;
             return itemD;
         }else{
@@ -83,7 +73,7 @@ articuloCarrito = [...articuloCarrito, infoCurso]
 console.log(articuloCarrito);
 }
         carritoHTML();
-}
+};
 
 
 // generar carrito
@@ -114,10 +104,7 @@ contenedorCarrito.appendChild(row);
 
 // como usamos appendChill, se van a ir agregando los curso al carrito desde el principio es decir se van a duplicar a cada click ejemplo: primer click: curso1, segundo click: curso1, curso1, curso 2, como vemos el curso1 se volvio a agregar y eso no lo deseamos.
 function limpiarHTML(params) {
-// forma lenta
-    // contenedorCarrito.innerHTML = ''
 
-// forma rapida con while
 // elimina el primer hijo si es que contenedorCarrito tiene ya algo previo
 while (contenedorCarrito.firstChild) {
     contenedorCarrito.removeChild(contenedorCarrito.firstChild)
