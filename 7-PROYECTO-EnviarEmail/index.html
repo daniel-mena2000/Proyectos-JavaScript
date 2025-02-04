@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Envio de Emails</title>
     <link rel="stylesheet" href="dist/app.css">
+    <link rel="stylesheet" href="dist/spinner.css">
 </head>
 <body class="min-h-screen bg-slate-300">
     <div class="max-w-3xl mx-auto p-10">
@@ -28,7 +29,7 @@
                 </div>
 
                 <div id="botones" class="flex gap-5">
-                    <button 
+                    <button
                         type="submit"
                         class="flex-1 bg-pink-600 text-white flex justify-center gap-2 items-center p-3 opacity-50"
                         disabled
@@ -39,7 +40,7 @@
                         Enviar
                     </button>
 
-                    <button 
+                    <button
                         class="flex-1 bg-gray-800 text-white flex justify-center gap-2 items-center p-3"
                         type="reset"
                     >
@@ -48,8 +49,21 @@
                         </svg>
                         Reset
                     </button>
-                </div>           
+                </div>
             </form>
+
+            <div id="spinner" class="hidden flex justify-center mt-10">
+                <div class="sk-chase">
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                  </div>
+            </div>
+
+
         </div>
     </div>
 
