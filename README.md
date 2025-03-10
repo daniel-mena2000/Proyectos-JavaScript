@@ -20,7 +20,7 @@ Este repositorio contiene una colección de proyectos desarrollados en **JavaScr
 3. **🎉 Recordatorio de Fechas**
    Una herramienta sencilla para recordar fechas importantes como cumpleaños, aniversarios o eventos especiales.
 
-4. **❓ Quiz **
+4. **❓ Quiz**
    Un juego de preguntas y respuestas donde los usuarios pueden poner a prueba sus conocimientos.
 
 5. **⏳ Temporizador Pomodoro**
