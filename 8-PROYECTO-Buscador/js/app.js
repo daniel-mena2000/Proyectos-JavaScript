@@ -80,6 +80,17 @@ color.addEventListener('change', (e) => {
     filtrarAuto();
 })
 
+//En lugar de agregar addEventListener a cada select, podemos usar document.addEventListener('change', ...) en un solo evento.
+//Nota: Cambiar el nombre de los precios minimo y maximo y que coincidan con los de los ID ya que no coinciden los nombres y no funcionara
+/*
+document.addEventListener('change', (e) => {
+    if (e.target.matches('select')) {
+        const campo = e.target.id;
+        datosBusqueda[campo] = e.target.value;
+        filtrarAuto();
+    }
+});*/
+
 //Funciones
 //Le pasamos como parametro el resultado del filtrado en este caso lo llamaremos autos y no resultado y en caso de llamarlo de otra forma hay que modificar el foreach ejemplo: resultado.foreach() ya que ya no iterara desde la lista "autos" si no desde el filtrado que viene igualmente desde la lista "autos" pero ya con un filtro
 function mostrarAutos(autos) {
