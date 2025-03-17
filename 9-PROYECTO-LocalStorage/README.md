@@ -17,3 +17,11 @@ Aparte de mejorar mi manejo del **DOM**, aprendí sobre **localStorage**, una AP
 Uno de los conceptos clave que entendí es que, para guardar un **array** o un **objeto**, primero debo convertirlo en un **string** usando `JSON.stringify()`. Luego, al recuperar la información, debo transformarla de nuevo a su formato original con `JSON.parse()`.
 
 Además, comprendí la importancia de **actualizar y repintar la información** en la interfaz cada vez que se modifica el almacenamiento, asegurando que el usuario siempre vea los datos correctos.
+
+
+<p align="center">
+  <img src="./img/local.png" alt="buscador">
+</p>
+
+
+> **Nota**: En este proyecto se encontraran con clases con nombres que hacen referencia a twitter ya que la plantilla del proyecto inicialmente era con ese tema pero no le encontré mucha relación con  twitter así que lo deje como un simple To-Do-List.
