@@ -4,7 +4,8 @@ const emailInput = document.querySelector('#email');
 const fechaInput = document.querySelector('#fecha');
 const sintomasInput = document.querySelector('#sintomas');
 const contenedorCitas = document.querySelector('#citas');
-const formulario = document.querySelector('#formulario-cita')
+const formulario = document.querySelector('#formulario-cita');
+const formularioInput = document.querySelector('#formulario-cita input[type="submit"]')
 //Crearemos un objeto y lo que el usuario vaya escribiendo en los inputs se va a ir guardando en el objeto
 
 let editando = false;
@@ -61,10 +62,27 @@ class AdminCitas {
     //Podemos mandar llamar mostrarCitas desde la funcion del submit pero lo haremos desde aqui y se mandara llamar cada que se agregue una cita ya que esta si esta en el submit
         this.mostrarCitas()
     };
+//Para editar recorreremos el array de citas y usaremos Map para esto ya que map a diferencia de foreach este nos permite modificarlo y nos regresa un array nuevo que va a tener la informacion actualizada de la cita que editamos
+    editarCita(citaActualizada){
+    //Veremos si el id de la cita recorrida conicide con la que le pasamos por parametro que seria a la que le dimos editar, si coincide mandamos la "citaActualizada" a editar y lo que no pues se queda igual
+        this.citas = this.citas.map(item => item.id === citaActualizada.id ? citaActualizada : item)
+        this.mostrarCitas();
+    }
+
+    eliminar(id){
+        this.citas = this.citas.filter(item => item.id !== id);
+        this.mostrarCitas();
+    }
+
     mostrarCitas(){
 //Para mostrar primero limpiamos el HTML previo
 while (contenedorCitas.firstChild) {
     contenedorCitas.removeChild(contenedorCitas.firstChild)
+}
+//mensaje que se mostrara si hay citas o no
+if (this.citas.length === 0) {
+    contenedorCitas.innerHTML = '<p class="text-xl mt-5 mb-10 text-center">No Hay Pacientes</p>';
+    return;
 }
 //Generando citas
 this.citas.forEach(cita => {
@@ -103,6 +121,7 @@ this.citas.forEach(cita => {
     const btnEliminar = document.createElement('button');
     btnEliminar.classList.add('py-2', 'px-10', 'bg-red-600', 'hover:bg-red-700', 'text-white', 'font-bold', 'uppercase', 'rounded-lg', 'flex', 'items-center', 'gap-2');
     btnEliminar.innerHTML = 'Eliminar <svg fill="none" class="h-5 w-5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>'
+    btnEliminar.onclick = () => this.eliminar(cita.id);
 
     const contenedorBotones = document.createElement('DIV');
     contenedorBotones.classList.add('flex', 'justify-between', 'mt-10');
@@ -151,10 +170,15 @@ function submitCita(e) {
         new Notificacion({texto:'Todos los campos son obligatorios', tipo: 'error'})
         return;
     };
-//If que nos servira para ver si es un registro nuevo o estamos editando un registro
+//Este if entrara una vez que editando sea TRUE y esto se hace una vez demos click en editar que llama a la funcion cargarEdicion que coloca a editando en "TRUE".
     if (editando) {
-        console.log('editando');
-
+//Mandamos llamar el metodo editarCita que espera como parametro el objeto con las citas para poder iterarlo y ver si es el que coincide con el ID
+        citas.editarCita({...citaObj});
+        new Notificacion({
+            texto: 'Editado correctamente',
+            tipo: 'exito'
+        })
+//Si no se esta editando simplemente se hace el registro nuevo
     }else{
         console.log('registro nuevo');
     //Para que no se reescriba el objeto cada que agregamos una citas le pasaremos una copia
@@ -169,6 +193,8 @@ function submitCita(e) {
 //Reiniciamos formulario al hacer submit
     formulario.reset();
     reiniciarObjetoCita();
+    formularioInput.value = "Registrar Paciente";
+    editando = false;
 
 };
 //Necesitamos reiniciar el objeto una vez agregada la citas ya que la informacion se queda en memoria
@@ -201,4 +227,5 @@ function cargarEdicion(cita) {
     sintomasInput.value = cita.sintomas;
 
     editando = true;
+    formularioInput.value = "Guardar Cambios"
 }
